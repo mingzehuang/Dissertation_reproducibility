@@ -61,6 +61,6 @@ save(value, file = "RunTimePlot_v2.Rda")
 #                         latentcor(X = X_6482_481, types = "tru", method = "original"), latentcor(X = X_6482_481, types = "tru"),
 #                         times = 5L, unit = "s")
 # save(timing, file = "timing.rda")
->>>>>>> 4069a11a051b47e2e6570f97f99c3fb9584e1362
+
 
 
