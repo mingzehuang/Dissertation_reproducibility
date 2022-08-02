@@ -1,5 +1,2 @@
 Loading required package: foreach
 Loading required package: future
-Error in as.matrix(X) : object 'X_6481_400' not found
-Calls: microbenchmark -> latentcor -> as.matrix
-Execution halted
