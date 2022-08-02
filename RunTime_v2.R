@@ -3,35 +3,32 @@
 
 rm(list = ls())
 
+library(parallel)
 library(microbenchmark)
 library(latentcor)
-library(doFuture)
-registerDoFuture()
-plan(future.batchtools::batchtools_slurm)
+
+#plan(future.batchtools::batchtools_slurm)
 load("/scratch/user/sharkmanhmz/Dissertation_reproducibility/Dissertation_reproducibility/amgutpruned.rdata") # 6482 by 481 matrix.
+plist = rbind(rep(c(100, 6482), 7), rep(c(20, 50, 100, 200, 300, 400, 481), each = 2))
+registerDoFuture()
+plan(multicore, workers = 72)
+value = 
+  foreach (dim = 1:ncol(plist), .combine = rbind()) %dorng% {
+  n = plist[1, i]; p = plist[2, i]
+  time_org <- time_v2 <- rep(NA, ncol(plist)) # the ncol is from microbenchmark print format.
 
-plist <- c(2, 5, 10, 20, 50, 100, 200, 300, 400, 481)
-
-for (dim in c(100, nrow(amgutpruned))){
-
-  time_org <- time_v2 <- rep(NA, length(plist)) # the ncol is from microbenchmark print format.
-
-  for (i in 1:length(plist)){
     p <- plist[i]
-    subdat <- amgutpruned[1:dim, 1:p]
+    subdat <- amgutpruned[1:n, 1:p]
 
-    time_org[i] <- median(microbenchmark(latentcor(subdat, types = "trunc", method = "original")$R, times = 2, unit = "s")$time) # to use fixed unit: "seconds"
+    time_org[i] <- median(microbenchmark(latentcor(subdat, types = "tru", method = "original")$R, times = 2, unit = "s")$time) # to use fixed unit: "seconds"
 
-    time_v2[i] <- median(microbenchmark(latentcor(subdat, types = "trunc", method = "approx")$R, times = 10, unit = "s")$time) # to use fixed unit: "seconds"
+    time_v2[i] <- median(microbenchmark(latentcor(subdat, types = "tru", method = "approx")$R, times = 10, unit = "s")$time) # to use fixed unit: "seconds"
 
     cat("Done with n = ", dim, " p = ", p, "\n\n\n")
-  }
-
-  save(time_org, time_v2, file = paste0("RunTimePlot_v2_range_", dim, ".Rda"))
+  valuelist = c(time_org, time_v2)
 }
+save(value, file = "RunTimePlot_v2.Rda")
 
-# library(parallel)
-# library(doFuture)
 # X_100_20 = amgutpruned[1:100, 1:20]
 # X_100_50 = amgutpruned[1:100, 1:50]
 # X_100_100 = amgutpruned[1:100, 1:100]
@@ -47,7 +44,7 @@ for (dim in c(100, nrow(amgutpruned))){
 # X_6482_400 = amgutpruned[1:nrow(amgutpruned), 1:400]
 # X_6482_481 = amgutpruned[1:nrow(amgutpruned), 1:ncol(amgutpruned)]
 # registerDoFuture()
-# plan(multisession, workers = availableCores())
+# plan(multisession, workers = 72)
 # timing = microbenchmark(latentcor(X = X_100_20, types = "tru", method = "original"), latentcor(X = X_100_20, types = "tru"),
 #                         latentcor(X = X_100_50, types = "tru", method = "original"), latentcor(X = X_100_50, types = "tru"),
 #                         latentcor(X = X_100_100, types = "tru", method = "original"), latentcor(X = X_100_100, types = "tru"),
