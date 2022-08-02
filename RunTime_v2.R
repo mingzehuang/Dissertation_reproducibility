@@ -47,7 +47,7 @@ X_6482_200 = amgutpruned[1:nrow(amgutpruned), 1:200]
 X_6482_300 = amgutpruned[1:nrow(amgutpruned), 1:300]
 X_6482_400 = amgutpruned[1:nrow(amgutpruned), 1:400]
 X_6482_481 = amgutpruned[1:nrow(amgutpruned), 1:ncol(amgutpruned)]
-
+registerDoFuture()
 plan(multisession, workers = availableCores())
 timing = microbenchmark(latentcor(X = X_100_20, types = "tru", method = "original"), latentcor(X = X_100_20, types = "tru"),
                         latentcor(X = X_100_50, types = "tru", method = "original"), latentcor(X = X_100_50, types = "tru"),
