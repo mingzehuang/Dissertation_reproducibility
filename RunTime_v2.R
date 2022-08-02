@@ -56,13 +56,13 @@ timing = microbenchmark(latentcor(X = X_100_20, types = "tru", method = "origina
                         latentcor(X = X_100_300, types = "tru", method = "original"), latentcor(X = X_100_300, types = "tru"),
                         latentcor(X = X_100_400, types = "tru", method = "original"), latentcor(X = X_100_400, types = "tru"),
                         latentcor(X = X_100_481, types = "tru", method = "original"), latentcor(X = X_100_481, types = "tru"),
-                        latentcor(X = X_6481_20, types = "tru", method = "original"), latentcor(X = X_6481_20, types = "tru"),
-                        latentcor(X = X_6481_50, types = "tru", method = "original"), latentcor(X = X_6481_50, types = "tru"),
-                        latentcor(X = X_6481_100, types = "tru", method = "original"), latentcor(X = X_6481_100, types = "tru"),
-                        latentcor(X = X_6481_200, types = "tru", method = "original"), latentcor(X = X_6481_200, types = "tru"),
-                        latentcor(X = X_6481_300, types = "tru", method = "original"), latentcor(X = X_6481_300, types = "tru"),
-                        latentcor(X = X_6481_400, types = "tru", method = "original"), latentcor(X = X_6481_400, types = "tru"),
-                        latentcor(X = X_6481_481, types = "tru", method = "original"), latentcor(X = X_6481_481, types = "tru"),
+                        latentcor(X = X_6482_20, types = "tru", method = "original"), latentcor(X = X_6482_20, types = "tru"),
+                        latentcor(X = X_6482_50, types = "tru", method = "original"), latentcor(X = X_6482_50, types = "tru"),
+                        latentcor(X = X_6482_100, types = "tru", method = "original"), latentcor(X = X_6482_100, types = "tru"),
+                        latentcor(X = X_6482_200, types = "tru", method = "original"), latentcor(X = X_6482_200, types = "tru"),
+                        latentcor(X = X_6482_300, types = "tru", method = "original"), latentcor(X = X_6482_300, types = "tru"),
+                        latentcor(X = X_6482_400, types = "tru", method = "original"), latentcor(X = X_6482_400, types = "tru"),
+                        latentcor(X = X_6482_481, types = "tru", method = "original"), latentcor(X = X_6482_481, types = "tru"),
                         times = 5L, unit = "s")
 save(timing, file = "timing.rda")
 
