@@ -6,14 +6,15 @@ rm(list = ls())
 library(parallel)
 library(microbenchmark)
 library(latentcor)
-
+library(doFuture)
+library(doRNG)
 #plan(future.batchtools::batchtools_slurm)
 load("/scratch/user/sharkmanhmz/Dissertation_reproducibility/Dissertation_reproducibility/amgutpruned.rdata") # 6482 by 481 matrix.
 plist = rbind(rep(c(100, 6482), 7), rep(c(20, 50, 100, 200, 300, 400, 481), each = 2))
 registerDoFuture()
 plan(multicore, workers = 72)
 value = 
-  foreach (dim = 1:ncol(plist), .combine = rbind()) %dorng% {
+  foreach (i = 1:ncol(plist), .combine = rbind) %dorng% {
   n = plist[1, i]; p = plist[2, i]
   time_org <- time_v2 <- rep(NA, ncol(plist)) # the ncol is from microbenchmark print format.
 
