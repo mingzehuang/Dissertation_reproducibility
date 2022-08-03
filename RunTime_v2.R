@@ -25,7 +25,6 @@ value =
 
     time_v2[i] <- median(microbenchmark(latentcor(subdat, types = "tru", method = "approx")$R, times = 10, unit = "s")$time) # to use fixed unit: "seconds"
 
-    cat("Done with n = ", dim, " p = ", p, "\n\n\n")
   valuelist = c(time_org, time_v2)
 }
 save(value, file = "RunTimePlot_v2.Rda")
