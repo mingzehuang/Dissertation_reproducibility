@@ -5,7 +5,7 @@
 #SBATCH --partition=knl
 ##NECESSARY JOB SPECIFICATIONS
 #SBATCH --job-name=runtime      #Set the job name to
-#SBATCH --time=2:00:00               #Set the wall clock limit to 6hr and 30min
+#SBATCH --time=23:00:00               #Set the wall clock limit to 6hr and 30min
 #SBATCH --nodes=1                    #Request 1 node
 #SBATCH --ntasks-per-node=72         #Request 8 tasks/cores per node
 #SBATCH --mem=80GB                     #Request 320GB per node

@@ -1,0 +1,7 @@
+Loading required package: foreach
+Loading required package: future
+Loading required package: rngtools
+There were 36 warnings (use warnings() to see them)
+> proc.time()
+      user     system    elapsed 
+114748.064    416.832  35489.811 
