@@ -16,15 +16,10 @@ plan(multicore, workers = 72)
 value = 
   foreach (i = 1:ncol(plist), .combine = rbind) %dorng% {
   n = plist[1, i]; p = plist[2, i]
-  time_org <- time_v2 <- rep(NA, ncol(plist)) # the ncol is from microbenchmark print format.
-
-    p <- plist[i]
-    subdat <- amgutpruned[1:n, 1:p]
-
-    time_org[i] <- median(microbenchmark(latentcor(subdat, types = "tru", method = "original")$R, times = 2, unit = "s")$time) # to use fixed unit: "seconds"
-
-    time_v2[i] <- median(microbenchmark(latentcor(subdat, types = "tru", method = "approx")$R, times = 10, unit = "s")$time) # to use fixed unit: "seconds"
-
+  time_org <- time_v2 <- NULL
+  subdat <- amgutpruned[1:n, 1:p]
+  time_org <- median(microbenchmark(latentcor(subdat, types = "tru", method = "original")$R, times = 2, unit = "s")$time) # to use fixed unit: "seconds"
+  time_v2 <- median(microbenchmark(latentcor(subdat, types = "tru", method = "approx")$R, times = 10, unit = "s")$time) # to use fixed unit: "seconds"
   valuelist = c(time_org, time_v2)
 }
 save(value, file = "RunTimePlot_v2.Rda")
