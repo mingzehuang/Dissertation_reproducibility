@@ -448,16 +448,85 @@ types = get_types(schooling)</code></pre>
 <pre><code>##  [1] &quot;bin&quot; &quot;bin&quot; &quot;bin&quot; &quot;bin&quot; &quot;bin&quot; &quot;bin&quot; &quot;con&quot; &quot;con&quot; &quot;con&quot; &quot;con&quot; &quot;bin&quot; &quot;con&quot;
 ## [13] &quot;bin&quot; &quot;bin&quot; &quot;bin&quot; &quot;bin&quot; &quot;bin&quot; &quot;bin&quot; &quot;con&quot; &quot;con&quot; &quot;bin&quot; &quot;con&quot; &quot;bin&quot; &quot;con&quot;
 ## [25] &quot;con&quot; &quot;bin&quot; &quot;bin&quot; &quot;con&quot;</code></pre>
+<pre class="r"><code>R = latentcor(schooling, types = types, method = &quot;approx&quot;)$R
+colnames_R = colnames(R)
+Pearson_R = cor(schooling, use = &quot;pairwise.complete.obs&quot;)
+colnames(Pearson_R) = colnames_R
+Pearson_R[19, ]</code></pre>
+<pre><code>##      smsa66      smsa76      nearc2      nearc4     nearc4a     nearc4b 
+##  0.21528103  0.23460004  0.09804354  0.16362063  0.17313852 -0.02645677 
+##        ed76        ed66       age76       daded     nodaded       momed 
+##  0.31422365  0.45857129  0.28462013  0.16628065 -0.09348383  0.20323218 
+##     nomomed    momdad14    sinmom14      step14     south66     south76 
+## -0.09348383  0.13851591 -0.08847363 -0.03496285 -0.27565346 -0.28362974 
+##     lwage76       famed       black      wage76    enroll76         kww 
+##  1.00000000 -0.19151653 -0.30320625  0.94724600 -0.05093981  0.42837122 
+##     iqscore       mar76    libcrd14       exp76 
+##  0.21290446  0.20049539  0.22210038  0.01248411</code></pre>
+<pre class="r"><code>R[19, ]</code></pre>
+<pre><code>##      smsa66      smsa76      nearc2      nearc4     nearc4a     nearc4b 
+##  0.28166881  0.31720527  0.13214030  0.21268127  0.22561758 -0.03642028 
+##        ed76        ed66       age76       daded     nodaded       momed 
+##  0.30290367  0.46492348  0.30280860  0.17238327 -0.13457415  0.20896553 
+##     nomomed    momdad14    sinmom14      step14     south66     south76 
+## -0.13457415  0.20212370 -0.14812082 -0.06336596 -0.36348530 -0.37241697 
+##     lwage76       famed       black      wage76    enroll76         kww 
+##  1.00000000 -0.20183311 -0.41984755  0.99899993 -0.08773439  0.43584524 
+##     iqscore       mar76    libcrd14       exp76 
+##  0.21951357  0.27069339  0.29086655  0.04614463</code></pre>
+<pre class="r"><code>rbind(Pearson_R[19, ], R[19, ])</code></pre>
+<pre><code>##         smsa66    smsa76     nearc2    nearc4   nearc4a     nearc4b      ed76
+## [1,] 0.2152810 0.2346000 0.09804354 0.1636206 0.1731385 -0.02645677 0.3142236
+## [2,] 0.2816688 0.3172053 0.13214030 0.2126813 0.2256176 -0.03642028 0.3029037
+##           ed66     age76     daded     nodaded     momed     nomomed  momdad14
+## [1,] 0.4585713 0.2846201 0.1662806 -0.09348383 0.2032322 -0.09348383 0.1385159
+## [2,] 0.4649235 0.3028086 0.1723833 -0.13457415 0.2089655 -0.13457415 0.2021237
+##         sinmom14      step14    south66    south76 lwage76      famed
+## [1,] -0.08847363 -0.03496285 -0.2756535 -0.2836297       1 -0.1915165
+## [2,] -0.14812082 -0.06336596 -0.3634853 -0.3724170       1 -0.2018331
+##           black    wage76    enroll76       kww   iqscore     mar76  libcrd14
+## [1,] -0.3032062 0.9472460 -0.05093981 0.4283712 0.2129045 0.2004954 0.2221004
+## [2,] -0.4198476 0.9989999 -0.08773439 0.4358452 0.2195136 0.2706934 0.2908665
+##           exp76
+## [1,] 0.01248411
+## [2,] 0.04614463</code></pre>
+<pre class="r"><code>Pearson_R[22, ]</code></pre>
+<pre><code>##      smsa66      smsa76      nearc2      nearc4     nearc4a     nearc4b 
+##  0.20788960  0.22076358  0.11569151  0.15795533  0.17972008 -0.04158848 
+##        ed76        ed66       age76       daded     nodaded       momed 
+##  0.30189212  0.45016831  0.29726890  0.17054133 -0.08206258  0.19204102 
+##     nomomed    momdad14    sinmom14      step14     south66     south76 
+## -0.08206258  0.13061861 -0.07776850 -0.03916046 -0.25171075 -0.25512354 
+##     lwage76       famed       black      wage76    enroll76         kww 
+##  0.94724600 -0.19256091 -0.27103673  1.00000000 -0.05165900  0.40915951 
+##     iqscore       mar76    libcrd14       exp76 
+##  0.19201153  0.16918791  0.20712366  0.03003491</code></pre>
+<pre class="r"><code>rbind(Pearson_R[22, ], R[22, ])</code></pre>
+<pre><code>##         smsa66    smsa76    nearc2    nearc4   nearc4a     nearc4b      ed76
+## [1,] 0.2078896 0.2207636 0.1156915 0.1579553 0.1797201 -0.04158848 0.3018921
+## [2,] 0.2816688 0.3172053 0.1321403 0.2126813 0.2256176 -0.03642028 0.3029037
+##           ed66     age76     daded     nodaded     momed     nomomed  momdad14
+## [1,] 0.4501683 0.2972689 0.1705413 -0.08206258 0.1920410 -0.08206258 0.1306186
+## [2,] 0.4649235 0.3028086 0.1723833 -0.13457415 0.2089655 -0.13457415 0.2021237
+##        sinmom14      step14    south66    south76   lwage76      famed
+## [1,] -0.0777685 -0.03916046 -0.2517107 -0.2551235 0.9472460 -0.1925609
+## [2,] -0.1481208 -0.06336596 -0.3634853 -0.3724170 0.9989999 -0.2018331
+##           black wage76    enroll76       kww   iqscore     mar76  libcrd14
+## [1,] -0.2710367      1 -0.05165900 0.4091595 0.1920115 0.1691879 0.2071237
+## [2,] -0.4198476      1 -0.08773439 0.4358452 0.2195136 0.2706934 0.2908665
+##           exp76
+## [1,] 0.03003491
+## [2,] 0.04614463</code></pre>
 <pre class="r"><code>library(microbenchmark)
 microbenchmark(latentcor(schooling, types = types, method = &quot;original&quot;),
                latentcor(schooling, types = types, method = &quot;approx&quot;), times = 5L)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                      expr       min        lq
-##  latentcor(schooling, types = types, method = &quot;original&quot;) 1181.4075 1211.5287
-##    latentcor(schooling, types = types, method = &quot;approx&quot;)  479.8544  486.3672
-##       mean    median        uq       max neval
-##  1333.4411 1211.7692 1377.8678 1684.6321     5
-##   539.0729  498.3639  599.9641  630.8148     5</code></pre>
+##  latentcor(schooling, types = types, method = &quot;original&quot;) 1162.6932 1657.2241
+##    latentcor(schooling, types = types, method = &quot;approx&quot;)  537.4769  659.0933
+##      mean    median        uq      max neval
+##  1702.156 1800.5751 1868.8067 2021.483     5
+##   710.110  712.1089  766.9417  874.929     5</code></pre>
 </div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>

@@ -34,6 +34,15 @@ head(schooling, n = 6L)
 library(latentcor)
 types = get_types(schooling)
 types
+R = latentcor(schooling, types = types, method = "approx")$R
+colnames_R = colnames(R)
+Pearson_R = cor(schooling, use = "pairwise.complete.obs")
+colnames(Pearson_R) = colnames_R
+Pearson_R[19, ]
+R[19, ]
+rbind(Pearson_R[19, ], R[19, ])
+Pearson_R[22, ]
+rbind(Pearson_R[22, ], R[22, ])
 ```
 
 ```{r 4}
